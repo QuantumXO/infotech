@@ -1,31 +1,16 @@
-# Getting Started with Create React App
+# Infotech. Сікорський Дмитро. ТЗ
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Реалізовано:
+- 1-й екран для вибору бійця. Два користувачі можуть вибрати бійця (як приклад, по черзі) за допомогою клавіш зі стрілками. Перенаправлення на наступний крок через **2с** після обрання другого героя.
+- 2-й екран для вибору здібностей бійця. Користувач може вибрати до 6 здібностей за допомогою QWERTY-кнопок(приклад, для одного користувача). на цей крок відведено обмеженя в **4с** секунди. Перенаправлення на фінальну сторінку (приклад).
+- Github pages для перегляду результату: https://quantumxo.github.io/infotech.
 
-## Available Scripts
+## Доступні скрипти
 
-In the project directory, you can run:
+У каталозі проекту ви можете запустити:
 
-### `yarn start`
+### `yarn start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Запускає додаток у режимі розробки.
+Відкрийте [http://localhost:3000](http://localhost:3000), щоб переглянути його у браузері.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
