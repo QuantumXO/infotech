@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/infotech/static/css/main.58f910f0.css",
+    "main.js": "/infotech/static/js/main.e57c66d2.js",
+    "static/js/49.25a57a6f.chunk.js": "/infotech/static/js/49.25a57a6f.chunk.js",
+    "static/js/763.33aad88f.chunk.js": "/infotech/static/js/763.33aad88f.chunk.js",
+    "static/js/312.b13be6c6.chunk.js": "/infotech/static/js/312.b13be6c6.chunk.js",
+    "static/media/bg.jpeg": "/infotech/static/media/bg.b088d1289bda149a816f.jpeg",
+    "static/media/ability.png": "/infotech/static/media/ability.649e56ba71353dffecbd.png",
+    "static/media/Liu-Kang.webp": "/infotech/static/media/Liu-Kang.07afc737576d6e674200.webp",
+    "static/media/Kitana.jpeg": "/infotech/static/media/Kitana.ee4e258425829c6bdebe.jpeg",
+    "static/media/Reptile.jpeg": "/infotech/static/media/Reptile.435ddcc749af3205f84c.jpeg",
+    "static/media/sub-zero.jpeg": "/infotech/static/media/sub-zero.324c34771bb4aea71c4c.jpeg",
+    "static/media/Baraka.webp": "/infotech/static/media/Baraka.21f13a1a39aca7db04b6.webp",
+    "static/media/Raiden.gif": "/infotech/static/media/Raiden.df26aef398a7ea83de93.gif",
+    "static/media/Mileena.webp": "/infotech/static/media/Mileena.d83b59d0c725526c5ed2.webp",
+    "static/media/MortalKombat3-Regular.woff": "/infotech/static/media/MortalKombat3-Regular.37bfa757d588c06f52dc.woff",
+    "static/media/MortalKombat3-Regular.woff2": "/infotech/static/media/MortalKombat3-Regular.6e6a31bd87a2a585c5d5.woff2",
+    "static/media/Sonya-Blade.jpg": "/infotech/static/media/Sonya-Blade.61fa9f0acc3ee251348d.jpg",
+    "static/media/scorpion.webp": "/infotech/static/media/scorpion.2641f5e6b4c57e5719f1.webp",
+    "static/media/Kano.jpeg": "/infotech/static/media/Kano.52e2c3bb81ce763efa7e.jpeg",
+    "static/media/Jax.jpeg": "/infotech/static/media/Jax.a0af864fda2ddf5e0198.jpeg",
+    "index.html": "/infotech/index.html",
+    "main.58f910f0.css.map": "/infotech/static/css/main.58f910f0.css.map",
+    "main.e57c66d2.js.map": "/infotech/static/js/main.e57c66d2.js.map",
+    "49.25a57a6f.chunk.js.map": "/infotech/static/js/49.25a57a6f.chunk.js.map",
+    "763.33aad88f.chunk.js.map": "/infotech/static/js/763.33aad88f.chunk.js.map",
+    "312.b13be6c6.chunk.js.map": "/infotech/static/js/312.b13be6c6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.58f910f0.css",
+    "static/js/main.e57c66d2.js"
+  ]
+}

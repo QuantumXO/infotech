@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkinfotech=self.webpackChunkinfotech||[]).push([[312],{312:(e,s,t)=>{t.r(s),t.d(s,{default:()=>a});var c=t(791),h=t(689),i=t(912),l=t(184);const n=()=>{const e=(0,h.s0)(),{isSelectedFighters:s}=(0,i.b)();return(0,c.useEffect)((()=>{!s&&e("/")}),[e,s]),(0,l.jsx)("div",{className:"fight",children:(0,l.jsx)("h1",{className:"title",children:"Fight!"})})},a=(0,c.memo)(n)}}]);
+//# sourceMappingURL=312.b13be6c6.chunk.js.map
