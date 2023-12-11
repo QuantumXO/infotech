@@ -35,14 +35,15 @@ const Abilities: FC = (): ReactElement => {
 
 	const handleKeyPress = useCallback((e: KeyboardEvent): void => {
 		const { key } = e;
-		switch (key) {
+		const keyInLowerCase: string = key.toLowerCase();
+		switch (keyInLowerCase) {
 			case 'q':
 			case 'w':
 			case 'e':
 			case 'r':
 			case 't':
 			case 'y': {
-				const ability: IFighterAbility | undefined = FIGHTER_ABILITIES.find(({ button }: IFighterAbility) => button === key);
+				const ability: IFighterAbility | undefined = FIGHTER_ABILITIES.find(({ button }: IFighterAbility) => button === keyInLowerCase);
 				if (ability) {
 					setActiveFighterAbilities(ability.type);
 				} else {
