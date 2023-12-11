@@ -22,6 +22,7 @@ html, body {
 body {
   color: #ffffff;
   text-shadow: 4px 4px 1px #000000;
+  font-style: italic;
   font-family: 'Mortal Kombat', Arial, SansSerif, serif;
   background: #3c3c3c url(../images/bg.jpeg) 50% / cover no-repeat;
 }
@@ -74,15 +75,30 @@ body {
       }
 
       &.selected {
+        &:after {
+          top: 30px;
+          left: 50%;
+          position: absolute;
+          transform: translateX(-50%);
+          font-size: 36px;
+          content: attr(data-selected-user-number);
+          z-index: 9;
+        }
         &.first--selected {
           &::before {
             border: 6px solid #00df00;
+          }
+          &:after {
+            color: #00df00;
           }
         }
 
         &.second--selected {
           &::before {
             border: 6px solid #ff1700;
+          }
+          &:after {
+            color: #ff1700;
           }
         }
       }
@@ -162,7 +178,7 @@ body {
 
   .fighter--abilities {
     display: inline-flex;
-    margin-top: 46px;
+    margin-top: 64px;
     align-items: center;
     justify-content: center;
 
@@ -185,4 +201,11 @@ body {
       }
     }
   }
+}
+
+.fight {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -1,4 +1,4 @@
-import { FC, memo, ReactElement, useEffect, useState } from 'react';
+import { FC, memo, ReactElement, useCallback, useEffect, useState } from 'react';
 import { FIGHTERS, FIGHTERS_COLUMNS_NUMBER, FIGHTERS_ROWS_NUMBER, VERSUS_URL } from '../../contants';
 import { IActiveFighterCell, ISelectedFighters } from '../../interfaces';
 import { useNavigate } from 'react-router-dom';
@@ -22,52 +22,71 @@ const FighterSelection: FC = (): ReactElement => {
 		}
 	}, [isSelectedFighters, navigate]);
 
-	const handleKeyPress = async (e: KeyboardEvent): Promise<void> => {
-		switch (e.key) {
-			case 'ArrowUp': {
-				setActiveFighterCell((prevValue: IActiveFighterCell): IActiveFighterCell => ({
-					row: (prevValue.row - 1 + FIGHTERS_ROWS_NUMBER) % FIGHTERS_ROWS_NUMBER,
-					col: prevValue.col,
-				}));
-				break;
+	const handleEnterKey = useCallback((): void => {
+		if (!isSelectedFighters) {
+			const fighterIndex: number = activeFighterCell.row * FIGHTERS_COLUMNS_NUMBER + activeFighterCell.col;
+			const fighterId: string = FIGHTERS[fighterIndex].id;
+			setSelectedFighters((prevState: ISelectedFighters): ISelectedFighters => {
+				const { first, second } = prevState;
+				const isCurrentFighterFirst: boolean = !first;
+				const isAlreadySelected: boolean = first === fighterId || second === fighterId;
+				return isAlreadySelected ? prevState : {
+					first: isCurrentFighterFirst ? fighterId : first,
+					second: isCurrentFighterFirst ? second : fighterId,
+				};
+			});
+		}
+	}, [isSelectedFighters, activeFighterCell, setSelectedFighters]);
+
+	const handleArrowKey = useCallback((arrowKey: 'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight'): void => {
+		setActiveFighterCell((prevState: IActiveFighterCell): IActiveFighterCell => {
+			let newRow: number | undefined;
+			let newCol: number | undefined;
+			switch (arrowKey) {
+				case 'ArrowUp': {
+					newRow = (prevState.row - 1 + FIGHTERS_ROWS_NUMBER) % FIGHTERS_ROWS_NUMBER;
+					newCol = prevState.col;
+					break;
+				}
+				case 'ArrowDown': {
+					newRow = (prevState.row + 1) % FIGHTERS_ROWS_NUMBER;
+					newCol = prevState.col;
+					break;
+				}
+				case 'ArrowLeft': {
+					newRow = prevState.row;
+					newCol = (prevState.col - 1 + FIGHTERS_COLUMNS_NUMBER) % FIGHTERS_COLUMNS_NUMBER;
+					break;
+				}
+				case 'ArrowRight': {
+					newRow = prevState.row;
+					newCol = (prevState.col + 1) % FIGHTERS_COLUMNS_NUMBER;
+					break;
+				}
 			}
-			case 'ArrowDown': {
-				setActiveFighterCell((prevValue: IActiveFighterCell): IActiveFighterCell => ({
-					row: (prevValue.row + 1) % FIGHTERS_ROWS_NUMBER,
-					col: prevValue.col,
-				}));
-				break;
+			if (typeof newRow === 'number' && typeof newCol === 'number') {
+				return {
+					row: newRow,
+					col: newCol,
+				}
+			} else {
+				throw new Error('Arrow button error');
 			}
-			case 'ArrowLeft': {
-				setActiveFighterCell((prevValue: IActiveFighterCell): IActiveFighterCell => ({
-					row: prevValue.row,
-					col: (prevValue.col - 1 + FIGHTERS_COLUMNS_NUMBER) % FIGHTERS_COLUMNS_NUMBER,
-				}));
-				break;
-			}
+		})
+	}, []);
+
+	const handleKeyPress = (e: KeyboardEvent): void => {
+		const { key } = e;
+		switch (key) {
+			case 'ArrowUp':
+			case 'ArrowDown':
+			case 'ArrowLeft':
 			case 'ArrowRight': {
-				setActiveFighterCell((prevValue: IActiveFighterCell): IActiveFighterCell => ({
-					row: prevValue.row,
-					col: (prevValue.col + 1) % FIGHTERS_COLUMNS_NUMBER,
-				}));
+				handleArrowKey(key);
 				break;
 			}
 			case 'Enter': {
-				if (!isSelectedFighters) {
-					await new Promise(resolve => setTimeout(resolve, 0));
-					const fighterIndex: number = activeFighterCell.row * FIGHTERS_COLUMNS_NUMBER + activeFighterCell.col;
-					const fighterId: string = FIGHTERS[fighterIndex].id;
-					setSelectedFighters((prevState: ISelectedFighters): ISelectedFighters => {
-						const { first, second } = prevState;
-						const isCurrentFighterFirst: boolean = !first;
-						const isAlreadySelected: boolean = first === fighterId || second === fighterId;
-
-						return isAlreadySelected ? prevState : {
-							first: isCurrentFighterFirst ? fighterId : first,
-							second: isCurrentFighterFirst ? second : fighterId,
-						};
-					});
-				}
+				handleEnterKey();
 				break;
 			}
 		}
@@ -85,7 +104,7 @@ const FighterSelection: FC = (): ReactElement => {
 		<div className="fighter--selection">
 			{isSelectedFighters && renderFightLabel()}
 			<h1 className="title">select your fighter</h1>
-			<FightersTable selectedFighters={selectedFighters} activeFighterCell={activeFighterCell} />
+			<FightersTable selectedFighters={selectedFighters} activeFighterCell={activeFighterCell}/>
 			<div className="zone--label">kombat zone: soul chamber</div>
 		</div>
 	);

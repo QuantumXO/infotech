@@ -1,8 +1,8 @@
-import { FC, memo, ReactElement, useEffect } from 'react';
+import { FC, memo, ReactElement, useCallback, useEffect } from 'react';
 import { useAppContext } from '../../context';
 import { NavigateFunction } from 'react-router/dist/lib/hooks';
 import { useNavigate } from 'react-router-dom';
-import { FIGHTER_ABILITIES, FIGHTERS, VERSUS_URL } from '../../contants';
+import { FIGHT_URL, FIGHTER_ABILITIES, FIGHTERS } from '../../contants';
 import { IFighter, IFighterAbility } from '../../interfaces';
 import cx from 'classnames';
 
@@ -16,15 +16,13 @@ const Abilities: FC = (): ReactElement => {
 
 	useEffect(() => {
 		const redirectTimeout: NodeJS.Timeout = setTimeout((): void => {
-			navigate(VERSUS_URL);
+			navigate(FIGHT_URL);
 		}, 4000);
 		return (): void => clearTimeout(redirectTimeout);
 	}, [navigate]);
 
 	useEffect((): void => {
-		if (!isSelectedFighters) {
-			navigate('/');
-		}
+		!isSelectedFighters && navigate('/');
 	}, [isSelectedFighters, navigate]);
 
 	useEffect(() => {
@@ -35,7 +33,7 @@ const Abilities: FC = (): ReactElement => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const handleKeyPress = (e: KeyboardEvent): void => {
+	const handleKeyPress = useCallback((e: KeyboardEvent): void => {
 		const { key } = e;
 		switch (key) {
 			case 'q':
@@ -48,11 +46,11 @@ const Abilities: FC = (): ReactElement => {
 				if (ability) {
 					setActiveFighterAbilities(ability.type);
 				} else {
-					throw new Error('Ability type error');
+					throw new Error('Ability selection error');
 				}
 			}
 		}
-	};
+	}, [setActiveFighterAbilities]);
 
 	const renderFighterAbilities = (): ReactElement => {
 		return (

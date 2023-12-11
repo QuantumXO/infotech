@@ -1,11 +1,12 @@
-import React, { lazy, ReactElement, Suspense } from 'react';
+import React, { lazy, ReactElement, Suspense, NamedExoticComponent, LazyExoticComponent } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import '../assets/styles/styles.scss';
-import { VERSUS_URL } from '../contants';
+import { FIGHT_URL, VERSUS_URL } from '../contants';
 import { AppProvider } from '../context';
 
-const LazyFighterSelection = lazy(() => import('./FighterSelection'));
-const LazyAbilitiesSelection = lazy(() => import('./Abilities'));
+const LazyFighterSelection: LazyExoticComponent<NamedExoticComponent> = lazy(() => import('./FighterSelection'));
+const LazyAbilitiesSelection: LazyExoticComponent<NamedExoticComponent> = lazy(() => import('./Abilities'));
+const LazyFightPage: LazyExoticComponent<NamedExoticComponent> = lazy(() => import('./Fight'));
 
 const router = createBrowserRouter([
 	{
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
 	{
 		path: VERSUS_URL,
 		element: <LazyAbilitiesSelection/>,
+	},
+	{
+		path: FIGHT_URL,
+		element: <LazyFightPage/>,
 	},
 	{
 		path: '*',

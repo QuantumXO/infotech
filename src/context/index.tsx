@@ -5,7 +5,7 @@ import {
 	useMemo,
 	FC,
 	useState,
-	Context,
+	Context, useCallback,
 } from 'react';
 import { AppContextDataType, FighterAbilityType, IAppContext, ISelectedFighters } from '../interfaces';
 
@@ -19,17 +19,19 @@ export const useAppContext = (): IAppContext => {
 	return useMemo(() => appContext as IAppContext, [appContext]);
 };
 
-export const AppProvider: FC<{ children: ReactElement }> = ({ children }) => {
+export const AppProvider: FC<{ children: ReactElement }> = ({ children }): ReactElement => {
 	const [selectedFighters, setSelectedFighters] = useState<ISelectedFighters>({});
 	const [activeFighterAbilities, setActiveFighterAbilities] = useState<FighterAbilityType[]>([]);
 
 	const { first: firstSelectedFighter, second: secondSelectedFighter } = selectedFighters;
 	const isSelectedFighters: boolean = !!firstSelectedFighter && !!secondSelectedFighter;
 
-	const onSetActiveFighterAbilities = (ability: FighterAbilityType): void => setActiveFighterAbilities((prevState: FighterAbilityType[]) => {
-		const isActive: boolean = prevState.includes(ability);
-		return isActive ? prevState : [...prevState, ability];
-	});
+	const onSetActiveFighterAbilities = useCallback((ability: FighterAbilityType): void => {
+		setActiveFighterAbilities((prevState: FighterAbilityType[]) => {
+			const isActive: boolean = prevState.includes(ability);
+			return isActive ? prevState : [...prevState, ability];
+		})
+	}, []);
 
 	const context: IAppContext = useMemo((): IAppContext => {
 		return {
@@ -39,6 +41,7 @@ export const AppProvider: FC<{ children: ReactElement }> = ({ children }) => {
 			setSelectedFighters,
 			setActiveFighterAbilities: onSetActiveFighterAbilities,
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedFighters, isSelectedFighters, activeFighterAbilities]);
 	return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
 };

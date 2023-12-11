@@ -1,4 +1,4 @@
-import { FighterAbilities, FighterAbilityType, IFighter, IFighterAbility } from '../interfaces';
+import { IFighter, IFighterAbility } from '../interfaces';
 import scorpion from '../assets/images/fighters/scorpion.webp';
 import subZero from '../assets/images/fighters/sub-zero.jpeg';
 import liuKang from '../assets/images/fighters/Liu-Kang.webp';
@@ -39,6 +39,7 @@ export const FIGHTERS_ROWS_NUMBER = 3;
 export const FIGHTERS_COLUMNS_NUMBER = 5;
 
 export const VERSUS_URL = '/versus';
+export const FIGHT_URL = '/fight';
 
 export const FIGHTER_ABILITIES: IFighterAbility[] = [
 	{ type: 'FireballAttack', button: 'q' },

@@ -14,17 +14,19 @@ const FightersTable = ({ selectedFighters, activeFighterCell }: IFightersTablePr
 						const { name, id: fighterId, avatar }: IFighter = FIGHTERS[index];
 						const currentFighterSelectionIndex: number = Object.values(selectedFighters).indexOf(fighterId);
 						const isSelected: boolean = currentFighterSelectionIndex !== -1;
+						const isFirstUserSelectedFighter: boolean = currentFighterSelectionIndex === 0;
 						return (
 							<td
 								id={fighterId}
 								key={fighterId}
+								data-selected-user-number={isFirstUserSelectedFighter ? 1 : 2}
 								className={cx(
 									'fighters__table__cell',
 									{
 										active: activeFighterCell.row === rowIndex && activeFighterCell.col === colIndex,
 										selected: isSelected,
-										'first--selected': currentFighterSelectionIndex === 0,
-										'second--selected': currentFighterSelectionIndex === 1,
+										'first--selected': isFirstUserSelectedFighter,
+										'second--selected': !isFirstUserSelectedFighter,
 									},
 								)}
 							>
